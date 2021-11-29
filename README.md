@@ -99,6 +99,7 @@ An example `conda` workflow for an NLP project might look like:
     - This creates an environment named `nlp-env` which has the latest versions of Jupyter Notebook, scikit-learn, Matplotlib, and NLTK
 2. `conda activate nlp-env`
     - This activates the newly-created environment. Consider opening up and editing your `~/.bash_profile` so that this is activated every time instead of `learn-env`
+    - If you are running `jupyter notebook` and don't see `nlp-env` in the list of kernels, quit Jupyter Notebook and run `conda activate nlp-env` then `python -m ipykernel install --user --name nlp-env --display-name nlp-env`. Now if you run `jupyter notebook` again, you should see `nlp-env` in the list. If you don't actually need Jupyter Notebook for this (e.g. you are using VS Code for editing), don't worry about this step!
 3. `conda install seaborn`
     - This is an example of installing a new package after the initial environment creation. It's fine to do this as many times as you need to until you have all of the packages you need
 4. `conda env export environment.yml`
@@ -124,6 +125,7 @@ An example `pip` workflow for an NLP project might look like:
     - In order to avoid "polluting" the global environment and to make sure that your `requirements.txt` doesn't have extraneous requirements listed, make sure you have an environment activated
 3. `pip install notebook scikit-learn matplotlib nltk`
     - Installs the latest versions of Jupyter Notebook, scikit-learn, Matplotlib, and NLTK using `pip`
+    - If you are running `jupyter notebook` and don't see `nlp-env` in the list of kernels, quit Jupyter Notebook and run `conda activate nlp-env` then `python -m ipykernel install --user --name nlp-env --display-name nlp-env`. Now if you run `jupyter notebook` again, you should see `nlp-env` in the list. If you don't actually need Jupyter Notebook for this (e.g. you are using VS Code for editing), don't worry about this step!
 4. `pip install seaborn`
     - This is an example of installing a new package after the initial environment creation. It's fine to do this as many times as you need to until you have all of the packages you need
 5. `pip freeze > requirements.txt`
