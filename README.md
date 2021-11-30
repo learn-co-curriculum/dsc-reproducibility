@@ -96,14 +96,16 @@ When starting a new project that uses a `conda` environment, you want to begin b
 An example `conda` workflow for an NLP project might look like:
 
 1. `conda create --name nlp-env notebook scikit-learn matplotlib nltk`
-    - This creates an environment named `nlp-env` which has the latest versions of Jupyter Notebook, scikit-learn, Matplotlib, and NLTK
+    - This creates an environment named `nlp-env` that has the latest versions of Jupyter Notebook, scikit-learn, Matplotlib, and NLTK.
 2. `conda activate nlp-env`
-    - This activates the newly-created environment. Consider opening up and editing your `~/.bash_profile` or `~/.zshrc` so that this is activated every time instead of `learn-env`
+    - This activates the newly-created environment. Consider opening up and editing your `~/.bash_profile` or `~/.zshrc` so that this is activated every time instead of `learn-env`.
     - If you are running `jupyter notebook` and don't see `nlp-env` in the list of kernels, quit Jupyter Notebook and run `conda activate nlp-env` then `python -m ipykernel install --user --name nlp-env --display-name nlp-env`. Now if you run `jupyter notebook` again, you should see `nlp-env` in the list. If you don't actually need Jupyter Notebook for this (e.g. you are using VS Code for editing `.py` files), don't worry about this step!
 3. `conda install seaborn`
-    - This is an example of installing a new package after the initial environment creation. It's fine to do this as many times as you need to until you have all of the packages you need
+    - This is an example of installing a new package after the initial environment creation. It's fine to do this as many times as you need to until you have all of the packages you need.
+    - In some cases, a package will only be available through `pip install`, not `conda install`. It is recommended that you always attempt to use `conda install` first, but if this doesn't work, you can also use `pip install` and that information will be saved in the `conda` environment as well.
 4. `conda env export environment.yml`
-    - This creates a file called `environment.yml` in the current directory, which lists the requirements for your environment. Add, commit, and push this file to GitHub when it's ready
+    - This creates or overwrites a file called `environment.yml` in the current directory, which lists the requirements for your environment. Add, commit, and push this file to GitHub when it's ready.
+    - If you just want to see the environment information without overwriting `environment.yml`, you can enter `conda env export` without a file name and the information will be displayed in the terminal.
 
 You can then repeat steps 3 and 4 as you realize that new packages are needed. Step 4 will overwrite the current `environment.yml` file, and you'll want to sync it with GitHub as appropriate.
 
@@ -113,24 +115,26 @@ Complete documentation for managing `conda` environments can be found [here](htt
 
 The other main tool for installing packages you will encounter is `pip` (short for Package Installer for Python). Its functionality is more limited than `conda` but is widely used for deploying data projects (APIs, dashboards, web apps, etc.). `pip` requirements files are conventionally called `requirements.txt`.
 
-Using `pip` is a bit more complicated than just `conda` because you need to create an environment first, then you can install things with `pip`. You'll see references online to using [`virtualenv`](https://virtualenv.pypa.io/en/latest/) or [`venv`](https://docs.python.org/3/library/venv.html) (in Python 3.3 an higher) for accomplishing this, but since you already have Anaconda installed we recommend that you just use `conda` for creating the environment.
+Using `pip` is a bit more complicated than just `conda` because you need to create an environment first, then you can install things with `pip`. You'll see references online to using [`virtualenv`](https://virtualenv.pypa.io/en/latest/) or [`venv`](https://docs.python.org/3/library/venv.html) (in Python 3.3 and higher) for accomplishing this, but since you already have Anaconda installed we recommend that you just use `conda` for creating the environment.
 
 (See [this article](https://www.anaconda.com/blog/understanding-conda-and-pip) for a longer explanation of the similarities and differences between `conda` and `pip`.)
 
 An example `pip` workflow for an NLP project might look like:
 
 1. `conda create --name nlp-env pip`
-    - This creates an environment named `nlp-env` which contains only `pip`
+    - This creates an environment named `nlp-env` that contains only `pip`.
 2. `conda activate nlp-env`
-    - This activates the newly-created environment. Consider opening up and editing your `~/.bash_profile` or `~/.zshrc` so that this is activated every time instead of `learn-env`
-    - In order to avoid "polluting" the global environment and to make sure that your `requirements.txt` doesn't have extraneous requirements listed, make sure you have an environment activated
+    - This activates the newly-created environment. Consider opening up and editing your `~/.bash_profile` or `~/.zshrc` so that this is activated every time instead of `learn-env`.
+    - In order to avoid "polluting" the global environment and to make sure that your `requirements.txt` doesn't have extraneous requirements listed, make sure you have an environment activated.
 3. `pip install notebook scikit-learn matplotlib nltk`
-    - Installs the latest versions of Jupyter Notebook, scikit-learn, Matplotlib, and NLTK using `pip`
+    - Installs the latest versions of Jupyter Notebook, scikit-learn, Matplotlib, and NLTK using `pip`.
     - If you are running `jupyter notebook` and don't see `nlp-env` in the list of kernels, quit Jupyter Notebook and run `conda activate nlp-env` then `python -m ipykernel install --user --name nlp-env --display-name nlp-env`. Now if you run `jupyter notebook` again, you should see `nlp-env` in the list. If you don't actually need Jupyter Notebook for this (e.g. you are using VS Code for editing `.py` files), don't worry about this step!
 4. `pip install seaborn`
-    - This is an example of installing a new package after the initial environment creation. It's fine to do this as many times as you need to until you have all of the packages you need
+    - This is an example of installing a new package after the initial environment creation. It's fine to do this as many times as you need to until you have all of the packages you need.
+    - If your goal is to create a `requirements.txt` file for deployment, **do not** use `conda install` to install new packages. These will be listed in the `environment.yml` but not the `requirements.txt` and your deployment will likely fail.
 5. `pip freeze > requirements.txt`
-    - This creates a file called `requirements.txt` in the current directory, which lists the requirements for your environment. Add, commit, and push this file to GitHub when it's ready
+    - This creates or overwrites a file called `requirements.txt` in the current directory, which lists the requirements for your environment. Add, commit, and push this file to GitHub when it's ready.
+    - If you just want to see the environment information without overwriting `requirements.txt`, you can just enter `pip freeze` without a file name and the information will be displayed in the terminal.
 
 One of the platforms you can use to test out your `requirements.txt` is Binder:
 
